@@ -2,7 +2,7 @@
 * @Author: gilbetliu
 * @Date:   2015-03-06 17:09:37
 * @Last Modified by:   gilbetliu
-* @Last Modified time: 2015-03-09 16:38:08
+* @Last Modified time: 2015-03-09 17:16:34
 */
 
 'use strict';
@@ -12,4 +12,4 @@ var config = require('../config/config');
  
 var pool = mysql.createPool(config.mysqlDev);
  
-exports.db = pool;
+exports.pool = pool;
