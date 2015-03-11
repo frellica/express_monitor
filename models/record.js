@@ -2,7 +2,7 @@
 * @Author: gilbetliu
 * @Date:   2015-03-06 17:11:17
 * @Last Modified by:   gilbetliu
-* @Last Modified time: 2015-03-10 17:03:44
+* @Last Modified time: 2015-03-11 18:34:12
 */
 
 'use strict';
@@ -23,16 +23,37 @@ Record.prototype.insert = function(r, callback) {
         }
         // make the query
         console.log((r.timestamp / 1000).toFixed());
-        var query = connection.query(sql, [r.pageId, r.url, (r.timestamp / 1000).toFixed(), r.data.firstPaintFinished,
+        var query = connection.query(sql, [r.page_id, r.url, (r.timestamp / 1000).toFixed(), r.data.firstPaintFinished,
             r.data.firstScreenFinished, r.data.DOMContentLoaded, r.data.load], function(err, results) {
             if (err) {
                 callback(true);
                 return;
             }
+            connection.release();
             callback(false, results);
         });
         console.log(query.sql);
     });
 };
-
+Record.prototype.insertExtend = function(r, callback) {
+    var sql = 'INSERT INTO records_extend (`record_id`, `repaint_text`, `cpu_text` ) VALUES (?, ?, ?)';
+    // get a connection from the pool
+    db.pool.getConnection(function(err, connection) {
+        if (err) {
+            callback(true);
+            return;
+        }
+        // make the query
+        var query = connection.query(sql, [r.record_id, JSON.stringify(r.data.repaint),
+            JSON.stringify(r.data.cpu)], function(err, results) {
+            if (err) {
+                callback(true);
+                return;
+            }
+            connection.release();
+            callback(false, results);
+        });
+        // console.log(query.sql);
+    });
+};
 module.exports = Record;

@@ -2,7 +2,7 @@
 * @Author: gilbetliu
 * @Date:   2015-03-06 17:51:02
 * @Last Modified by:   gilbetliu
-* @Last Modified time: 2015-03-10 15:59:25
+* @Last Modified time: 2015-03-11 18:34:00
 */
 
 'use strict';
@@ -27,6 +27,7 @@ Page.prototype.getByName = function(name, callback) {
                 return;
             }
             console.dir('in models: ', results);
+            connection.release();
             callback(false, results);
         });
         console.log(query.sql);

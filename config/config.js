@@ -2,14 +2,14 @@
 * @Author: gilbetliu
 * @Date:   2015-03-06 17:08:09
 * @Last Modified by:   gilbetliu
-* @Last Modified time: 2015-03-09 17:16:55
+* @Last Modified time: 2015-03-11 18:33:34
 */
 
 'use strict';
 // var orm = require("orm");
 
 module.exports = {
-    mysqlDev: {
+    MYSQL_DEV: {
         host: 'localhost',
         user: 'root',
         password: '123456',
@@ -17,6 +17,12 @@ module.exports = {
         connectionLimit: 10,
         supportBigNumbers: true
     },
+    RESOURCE_TYPES: {
+        'css': 1,
+        'js': 2,
+        'img': 3,
+        'doc': 4
+    }
     // db: orm.connect('mysql://root:123456@localhost/profiler', function (err, db) {
     //     if (err) {
     //         throw err;
